@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Galactic</title>
+    <style>
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .background-video {
+  position: fixed; /* Mengatur posisi tetap pada layar */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Pastikan video mengisi seluruh area tanpa terdistorsi */
+  z-index: -1; /* Agar video tetap di belakang konten */
+}
+
+      .video-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.151);
+        z-index: 0;
+      }
+
+      .navbar-menu {
+        background-color: rgba(0, 0, 0, 0.144);
+        color: #fff;
+        margin: 0;
+        padding: 0;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 70px;
+        z-index: 1000;
+        backdrop-filter: blur(10px);
+        font-size: 10px;
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      .main-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f0f0f000;
+        position: relative;
+        flex-direction: column;
+        margin-top: 40px;
+        transform: translateX(-11%);
+      }
+
+      .judul {
+        font-size: 2rem;
+        text-align: center;
+        color: #fff;
+        margin-bottom: 20px;
+        transform: scale(1);
+        animation: slideIn 2s ease-out forwards;
+        cursor: pointer;
+      }
+
+      .judul:hover {
+        transform: scale(1.1);
+        transition: transform 0.6s ease;
+      }
+
+      @keyframes slideIn {
+        0% {
+          opacity: 0;
+          transform: translateY(-50px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .desk {
+        font-size: 13px;
+      }
+
+      .menu.show {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+      }
+
+      .menu {
+        position: fixed;
+        top: 200px; /* Menempatkan menu di bawah navbar */
+  left: 50%;
+  transform: translateX(-50%) scale(0); /* Pastikan menu dimulai dengan ukuran 0 */
+  opacity: 0;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  backdrop-filter: blur(5px);
+  position: absolute; /* Pastikan posisi absolute untuk menimpa konten lain */
+  z-index: 1000; /* Pastikan menu muncul di atas konten galeri */
+}
+
+      .menu a {
+        display: block;
+        padding: 5px 10px;
+        font-size: 1rem;
+        margin: 10px;
+        left: 50%;
+        text-decoration: none;
+        color: #fff;
+        padding: 5px 10px;
+        background-color: rgba(0, 0, 0, 0.404);
+        border-radius: 5px;
+        transition: 0.3s;
+        font-size: 15px;
+      }
+
+      .menu a:nth-child(1) {
+        top: 10%;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .menu a:nth-child(2) {
+        top: 20%;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .menu a:nth-child(3) {
+        top: 30%;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .menu a:nth-child(4) {
+        top: 40%;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .menu a:nth-child(5) {
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .menu a:nth-child(6) {
+        top: 60%;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .menu a:nth-child(7) {
+        top: 70%;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .menu a:nth-child(8) {
+        top: 80%;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .menu a:hover {
+        background-color: rgb(119, 0, 255);
+        color: #FFF;
+      }
+
+      .footer {
+        background-color: rgba(0, 0, 0, 0);
+        color: #fff;
+        text-align: center;
+        padding: 20px 0;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+      }
+
+      .footer p {
+        margin: 0;
+        font-size: 12px;
+      }
+
+      /* Planet Gallery Styles */
+      .planet-gallery {
+        margin-top: 100px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        padding: 20px;
+      }
+
+      .planet-item {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        max-width: 600px;
+        background-color: rgba(0, 0, 0, 0.5);
+        border-radius: 10px;
+        overflow: hidden;
+        animation-duration: 2s; /* Durasi animasi */
+  animation-fill-mode: forwards; /* Memastikan elemen tetap di posisi akhir */
+      }
+
+      .planet-image {
+        width: 50%;
+        height: 0;
+        padding-bottom: 50%;
+        background-size: cover;
+        background-position: center;
+      }
+
+      .planet-description {
+        width: 50%;
+        padding: 20px;
+        color: #fff;
+        font-size: 14px;
+      }
+
+      .planet-item:nth-child(odd) {
+  animation-name: slideInFromLeft;
+}
+
+.planet-item:nth-child(even) {
+  animation-name: slideInFromRight;
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+      .back-button {
+  position: absolute;
+  top: 15px; /* Sesuaikan posisi vertikal tombol di navbar */
+  right: 20px; /* Posisi tombol di sebelah kanan navbar */
+  padding: 10px 20px;
+  background-color: rgba(0, 0, 0, 0);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 10px;
+  transition: background-color 0.3s ease;
+  z-index: 1001; /* Agar tombol selalu muncul di atas konten lain */
+}
+
+.back-button:hover {
+  background-color:rgb(119, 0, 255);
+}
+    </style>
+  </head>
+  <body>
+    
+    <video class="background-video" autoplay loop muted>
+      <source src="space.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+    <div class="video-overlay"></div>
+
+    <div class="navbar">
+      <div class="navbar-menu">
+        <h1>
+          <a href="#" style="text-decoration: none; color: #fff; color: rgb(119, 0, 255); text-shadow:  
+          1px -1px 0px rgb(0, 0, 0), 
+          -1px 1px 0px rgb(136, 136, 136);"><em>GALACTIC</em></a>
+        </h1>
+        <a href="index.html" class="back-button">Back</a>
+        
+      </div>
+      
+    </div>
+
+      <!-- Planet Gallery Section -->
+      <div class="planet-gallery">
+        <!-- Planet 1 -->
+        <div class="planet-item">
+          <div class="planet-image" style="background-image: url('sun.png');"></div>
+          <div class="planet-description">
+            <h2>Sun</h2>
+            <p>The center of the Solar System, a massive ball of hot gas that provides light and heat to all the planets.</p>
+          </div>
+        </div>
+
+        <!-- Planet 2 -->
+        <div class="planet-item">
+          <div class="planet-image" style="background-image: url('mercury.png');"></div>
+          <div class="planet-description">
+            <h2>Mercury </h2>
+            <p>The closest planet to the Sun, small, and with extreme temperature changes due to its thin atmosphere.</p>
+          </div>
+        </div>
+
+        <!-- Planet 3 -->
+        <div class="planet-item">
+          <div class="planet-image" style="background-image: url('venus.png');"></div>
+          <div class="planet-description">
+            <h2>Venus </h2>
+            <p> Known for its thick atmosphere of carbon dioxide, Venus has surface temperatures hot enough to melt lead.</p>
+          </div>
+        </div>
+
+        <div class="planet-item">
+          <div class="planet-image" style="background-image: url('earth.png');"></div>
+          <div class="planet-description">
+            <h2>Earth </h2>
+            <p>The only known planet with life, featuring liquid water, a breathable atmosphere, and diverse ecosystems.</p>
+          </div>
+        </div>
+
+        <div class="planet-item">
+          <div class="planet-image" style="background-image: url('mars.png');"></div>
+          <div class="planet-description">
+            <h2>Mars </h2>
+            <p>Known as the "Red Planet" due to its iron oxide-rich surface, it has the tallest volcano and deepest canyon in the Solar System.</p>
+          </div>
+        </div>
+
+        <div class="planet-item">
+          <div class="planet-image" style="background-image: url('jupyter.png');"></div>
+          <div class="planet-description">
+            <h2>Jupiter </h2>
+            <p>The largest planet, a gas giant with a famous Great Red Spot, which is a massive storm, and dozens of moons.</p>
+          </div>
+        </div>
+
+        <div class="planet-item">
+          <div class="planet-image" style="background-image: url('saturn.png');"></div>
+          <div class="planet-description">
+            <h2>Saturn </h2>
+            <p>Famous for its beautiful ring system, made of ice and rock particles, Saturn is also a gas giant.</p>
+          </div>
+        </div>
+
+        <div class="planet-item">
+          <div class="planet-image" style="background-image: url('uranus.png');"></div>
+          <div class="planet-description">
+            <h2>Uranus </h2>
+            <p>An ice giant with a unique feature of rotating on its side, creating extreme seasons.</p>
+          </div>
+        </div>
+
+        <div class="planet-item">
+          <div class="planet-image" style="background-image: url('neptune.png');"></div>
+          <div class="planet-description">
+            <h2>Neptune </h2>
+            <p>The farthest planet from the Sun, with a striking blue color caused by methane in its atmosphere and strong winds.</p>
+          </div>
+        </div>
+
+        <div class="planet-item">
+          <div class="planet-image" style="background-image: url('pluto.png');"></div>
+          <div class="planet-description">
+            <h2>Pluto  </h2>
+            <p>Once considered the ninth planet, now classified as a dwarf planet, it has an elliptical orbit and is located in the Kuiper Belt.</p>
+          </div>
+        </div>
+
+
+        
+        <!-- More planets can be added similarly -->
+      </div>
+    </div>
+
+
+    
+  </body>
+</html>

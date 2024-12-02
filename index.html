@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Galactic</title>
+    <style>
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+
+      .background-video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1;
+        
+      }
+
+      .video-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.151); 
+        z-index: 0; 
+        }
+
+      .navbar-menu {
+        background-color: rgba(0, 0, 0, 0.144);
+        color: #fff;
+        margin: 0;
+        padding: 0;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 70px;
+        z-index: 1000;
+        backdrop-filter: blur(10px);
+        font-size: 10px;
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      .content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f0f0f000;
+        position: relative;
+        flex-direction: column;
+      }
+
+      .judul {
+        font-size: 25px;
+        text-align: center;
+        color: #fff;
+        margin-bottom: 20px;
+        transform: scale(1) ;
+        animation: slideIn 2s ease-out forwards;
+        cursor: pointer;
+      }
+
+      .judul:hover {
+        transform: scale(1.1);
+        transition: transform 0.6s ease;
+      }
+
+      @keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+      .desk {
+        font-size: 13px;
+      }
+
+      .menu.show {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+      }
+
+      .menu {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0;
+        transition: transform 0.5s ease, opacity 0.5s ease;
+      }
+
+      .menu a {
+        position: absolute;
+        display: inline-block;
+        text-decoration: none;
+        color: #fff;
+        padding: 5px 10px;
+        background-color: rgba(0, 0, 0, 0.404);
+        border-radius: 5px;
+        transition: 0.3s;
+        font-size: 15px;
+      }
+
+      .menu a:nth-child(1) {
+        top: -150px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .menu a:nth-child(2) {
+        top: 50%;
+        left: 130px;
+        transform: translateY(-50%);
+      }
+      .menu a:nth-child(3) {
+        top: 120px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .menu a:nth-child(4) {
+        top: 50%;
+        left: -200px;
+        transform: translateY(-50%);
+      }
+      .menu a:nth-child(5) {
+        top: -110px;
+        left: -140px;
+      }
+      .menu a:nth-child(6) {
+        top: -110px;
+        left: 100px;
+      }
+      .menu a:nth-child(7) {
+        top: 80px;
+        left: 100px;
+      }
+      .menu a:nth-child(8) {
+        top: 80px;
+        left: -150px;
+      }
+
+      .menu a:hover {
+        background-color: rgb(119, 0, 255);
+        color: #FFF;
+      }
+
+      .footer {
+  background-color: rgba(0, 0, 0, 0); /* Transparan dengan warna hitam */
+  color: #fff; /* Warna teks putih */
+  text-align: center;
+  padding: 20px 0;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.footer p {
+  margin: 0;
+  font-size: 12px;
+}
+
+@media (max-width: 768px) {
+  .judul {
+    font-size: 20px;
+  }
+
+  .menu a:nth-child(1) {
+        top: -120px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .menu a:nth-child(2) {
+        top: 50%;
+        left: 90px;
+        transform: translateY(-50%);
+      }
+      .menu a:nth-child(3) {
+        top: 100px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .menu a:nth-child(4) {
+        top: 50%;
+        left: -160px;
+        transform: translateY(-50%);
+      }
+      .menu a:nth-child(5) {
+        top: -90px;
+        left: -110px;
+      }
+      .menu a:nth-child(6) {
+        top: -90px;
+        left: 60px;
+      }
+      .menu a:nth-child(7) {
+        top: 60px;
+        left: 50px;
+      }
+      .menu a:nth-child(8) {
+        top: 60px;
+        left: -120px;
+      }
+}
+    </style>
+  </head>
+  <body>
+    <video class="background-video" autoplay loop muted>
+      <source src="space.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+    <div class="video-overlay"></div>
+
+    <div class="navbar">
+        <div class="navbar-menu">
+          <h1>
+            <a href="#" style="text-decoration: none; color: #fff; color: rgb(119, 0, 255); text-shadow:  
+            1px -1px 0px rgb(0, 0, 0), 
+            -1px 1px 0px rgb(136, 136, 136);"><em>GALACTIC</em></a>
+          </h1>
+          
+        </div>
+        
+      </div>
+
+    <div class="content">
+      <h1 class="judul" id="judul" style=" background-color: #00000062; border-radius: 50px; padding-top: 10px; padding-bottom: 10px; padding-left:20px; padding-right:20px;">WELCOME TO <br> <span style="color:rgb(119, 0, 255); text-shadow:  
+        1px -1px 0px rgb(0, 0, 0), 
+        -1px 1px 0px rgb(136, 136, 136);"><em>GALACTIC</em></span><br>
+      <!-- <p class="desk">tekan untuk membuka menu</p> -->
+      <div class="menu">
+        <a href="#">Home</a>
+        <a href="planets.html">Planets</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="info.html">Info</a>
+        <a href="login.html">Login</a>
+        <a href="credit.html">Credit</a>
+        <a href="profile.html">Profile</a>
+      </div>
+
+      
+    </div>
+
+
+    <footer class="footer">
+        <p>&copy; 2024 <span style="color:rgb(119, 0, 255); text-shadow:  
+            1px -1px 0px rgb(0, 0, 0), 
+            -1px 1px 0px rgb(136, 136, 136);"><em>GALACTIC</em></span>. All rights reserved. Make by <span style="color: #000000; color: rgb(119, 0, 255); text-shadow:  
+            1px -1px 0px rgb(0, 0, 0), 
+            -1px 1px 0px rgb(116, 116, 116);">SATRIA</span></p>
+      </footer>
+    
+
+    <script>
+      const planet = document.getElementById("judul");
+      const menu = document.querySelector(".menu");
+
+      planet.addEventListener("click", () => {
+        menu.classList.toggle("show");
+      });
+    </script>
+  </body>
+</html>

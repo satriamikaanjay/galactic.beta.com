@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Galactic</title>
+    <style>
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .background-video {
+  position: fixed; /* Mengatur posisi tetap pada layar */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Pastikan video mengisi seluruh area tanpa terdistorsi */
+  z-index: -1; /* Agar video tetap di belakang konten */
+}
+
+      .video-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.151);
+        z-index: 0;
+      }
+
+      .navbar-menu {
+        background-color: rgba(0, 0, 0, 0.144);
+        color: #fff;
+        margin: 0;
+        padding: 0;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 70px;
+        z-index: 1000;
+        backdrop-filter: blur(10px);
+        font-size: 10px;
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      .video-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 0;
+      }
+
+      .back-button {
+  position: absolute;
+  top: 15px; /* Sesuaikan posisi vertikal tombol di navbar */
+  right: 20px; /* Posisi tombol di sebelah kanan navbar */
+  padding: 10px 20px;
+  background-color: rgba(0, 0, 0, 0);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 10px;
+  transition: background-color 0.3s ease;
+  z-index: 1001; /* Agar tombol selalu muncul di atas konten lain */
+}
+
+.back-button:hover {
+  background-color:rgb(119, 0, 255);
+}
+
+
+.info-content {
+        color: #fff;
+        text-align: center;
+        margin-top: 50px;
+        font-size: 16px;
+        line-height: 1.8;
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <video class="background-video" autoplay loop muted>
+      <source src="space.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+
+    <div class="navbar">
+        <div class="navbar-menu">
+          <h1>
+            <a href="#" style="text-decoration: none; color: #fff; color: rgb(119, 0, 255); text-shadow:  
+            1px -1px 0px rgb(0, 0, 0), 
+            -1px 1px 0px rgb(136, 136, 136);"><em>GALACTIC</em></a>
+          </h1>
+          <a href="index.html" class="back-button">Back</a>
+          
+        </div>
+        
+      </div>
+
+
+      <div class="info-content">
+        <h1 class="info-header">sorry this page is not yet available</h1>
+    </div>
+    
+  </body>
+</html>
